@@ -1,9 +1,15 @@
-=link_to 'Home', root_path, class: 'brand'
-%ul
-  - if user_signed_in?
-    %li=link_to 'Logout', destroy_user_session_path, method: 'delete'
-    %li=link_to 'Edit Account', edit_user_registration_path
-  - else
-    %li=link_to 'Login', new_user_session_path
-    %li=link_to 'Sign Up', new_user_registration_path
-    
+.navbar-header
+  %button.navbar-toggle{ "data-toggle" => 'collapse', "data-target" => '.navbar-collapse' }
+    %span.sr-only Toggle navigation
+    %span.icon-bar
+    %span.icon-bar
+    %span.icon-bar
+  =link_to 'mastery', root_path, class: 'navbar-brand'
+.collapse.navbar-collapse
+  %ul.nav.navbar-nav.navbar-right
+    - if user_signed_in?
+      %li=link_to 'Log Out', destroy_user_session_path, method: 'delete'
+      %li=link_to 'Edit Account', edit_user_registration_path
+    - else
+      %li=link_to 'Log In', new_user_session_path
+      %li=link_to 'Sign Up', new_user_registration_path
