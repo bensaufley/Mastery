@@ -25,6 +25,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem "rspec-rails", :group => [:test, :development]
+# Test
+group :test do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+end
+
 # User Auth
 gem 'devise'
 gem 'bcrypt-ruby', '~> 3.1.2'
