@@ -24,7 +24,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem "rspec-rails", :group => [:test, :development]
+gem "rspec-rails", group: [:test, :development]
+gem "email_spec",  group: [:test, :development]
 # Test
 group :test do
   gem "factory_girl_rails"
