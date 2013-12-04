@@ -21,4 +21,32 @@ describe User do
       last_email.to.should include (user.email)
     end
   end
+
+  describe "#create_user" do
+    let(:user){ FactoryGirl.build(:user) }
+    
+    it "validates user" do
+      user.should be_valid
+    end
+
+    [:first_name,:last_name,:username,:email].each do |a|
+      it "does not validate with missing #{a.to_s.humanize}" do
+        user[a]=nil
+        user.should_not be_valid
+      end
+      # it "does not save invalid user" do
+      #   user[a]=nil
+      #   expect { user.save! }.to raise_error
+      # end
+    end
+
+    it "does not validate with improper email" do
+      user.email = "test"
+      user.should_not be_valid
+    end
+    
+    #i# t "saves valid user"
+    # #  expect { user.save! }.to_not raise_exception
+    #e# nd
+  end
 end
