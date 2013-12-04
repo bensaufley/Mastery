@@ -3,7 +3,7 @@
   %head
     %meta{ name: 'viewport', content: 'initial-scale=1, maximum-scale=1' }
     %title Mastery
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag    "application", media: "all"
     = csrf_meta_tags
     = surround '<!--[if lt IE 9]>'.html_safe, '<![endif]-->'.html_safe do
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -14,11 +14,15 @@
         =render 'layouts/navigation'
     %main{ role: 'main' }
       .container
-        .content
-          .row
-            .span12=render 'layouts/notifications'
-          .row
-            .span9
-              = yield
+        %header.page-header
+          - if content_for? :title
+            %h1=content_for :title
+        .row
+          %div{ class: (!flash.empty? ? 'col-md-8' : 'col-md-12' )}
+            = yield
+          - if !flash.empty?
+            .col-md-4=render 'layouts/notifications'
     %footer
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+      .container
+        %p Copyright ©2013 Ben Saufley
+    = javascript_include_tag "application"

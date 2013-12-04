@@ -13,6 +13,18 @@
  */
 
 @import "shared";
+$font-size-base: 16px;
 @import "bootstrap";
 body { padding-top: 60px; }
 @import "bootstrap/theme";
+
+header.navbar-fixed-top .dropdown-menu {
+  padding: 10px;
+  min-width: 320px;
+  max-width: 100%;
+  @include box-sizing(border-box);
+}
+
+.inline {
+  display: inline-block;
+}

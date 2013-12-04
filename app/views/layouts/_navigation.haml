@@ -11,5 +11,22 @@
       %li=link_to 'Log Out', destroy_user_session_path, method: 'delete'
       %li=link_to 'Edit Account', edit_user_registration_path
     - else
-      %li=link_to 'Log In', new_user_session_path
+      %li.dropdown
+        %a.dropdown-toggle{ 'data-toggle' => 'dropdown', href: '#' }
+          Login
+          %b.caret
+          %span.sr-only Toggle Dropdown
+        .dropdown-menu.col-md-4
+          = form_tag user_session_path, html: { class: 'form-group', role: 'form' } do
+            .input-group.form-group
+              .input-group-addon @
+              = text_field_tag 'user[username]', '', placeholder: 'Username', class: 'form-control', size: 35
+            .form-group
+              = password_field_tag 'user[password]', '', placeholder: 'Password', class: 'form-control'
+            .checkbox
+              = label_tag class: 'form-control' do
+                = check_box_tag 'user[remember_me]', class: 'form-control'
+                Remember Me
+            %button.btn.btn-default.pull-right Sign in
+          %p= link_to "Forgot your password?", new_password_path('user')
       %li=link_to 'Sign Up', new_user_registration_path

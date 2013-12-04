@@ -1,17 +1,27 @@
-%h2 Sign up
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+- content_for :title, 'Sign up'
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { class: 'form-group col-md-6 col-md-offset-3', role: 'form' }) do |f|
   = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password
-  %div
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %div= f.submit "Sign up"
-= render "devise/shared/links"
+  .form-group.input-group
+    .input-group-addon @
+    = f.label :username, class: 'sr-only'
+    = f.text_field :username, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Desired Username', class: 'form-control'
+  .row
+    .form-group.col-sm-6
+      = f.label :first_name, class: 'sr-only'
+      = f.text_field :first_name, autofocus: true, class: 'form-control ', autocapitalize: false, autocorrect: false, placeholder: 'First Name'
+    .form-group.col-sm-6
+      = f.label :last_name, class: 'sr-only'
+      = f.text_field :last_name, class: 'form-control', autocapitalize: false, autocorrect: false, placeholder: 'Last Name'
+  .form-group
+    = f.label :email, class: 'sr-only'
+    = f.email_field :email, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Email', class: 'form-control'
+  .form-group
+    = f.label :password, class: 'sr-only'
+    = f.password_field :password, placeholder: 'Password', class: 'form-control'
+  .form-group
+    = f.label :password_confirmation, class: 'sr-only'
+    = f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'form-control'
+  .pull-right= f.submit "Sign up", class: 'btn btn-default'
+  .row
+    .col-md-12
+      = render "devise/shared/links"
