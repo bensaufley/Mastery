@@ -7,5 +7,6 @@ class User < ActiveRecord::Base
   
   validates :username, :first_name, :last_name, presence: true
   validates :username, format: { with: /[A-Z][A-Z0-9\-_]{6,}/i }
+  validates :username, uniqueness: true
   
 end
