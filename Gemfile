@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 
@@ -24,8 +26,12 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem "rspec-rails", group: [:test, :development]
-gem "email_spec",  group: [:test, :development]
+group :test, :development do
+  gem "rspec-rails"
+  gem "shoulda"
+  gem "email_spec"
+end
+
 # Test
 group :test do
   gem "factory_girl_rails"
