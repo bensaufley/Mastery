@@ -15,8 +15,8 @@
     %main{ role: 'main' }
       .container
         %header.page-header
-          - if content_for? :title
-            %h1=content_for :title
+          = content_tag(:h1, content_for(:title))    if content_for? :title
+          = content_tag(:h4, content_for(:subtitle)) if content_for? :subtitle
         .row
           %div{ class: (!flash.empty? ? 'col-md-8' : 'col-md-12' )}
             = yield

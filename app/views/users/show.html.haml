@@ -1,0 +1,3 @@
+- content_for :title, "#{@user.first_name} #{@user.last_name}"
+- content_for :subtitle, ('(' + link_to("@#{@user.username}", @user) + ')').html_safe
+%p Find me in app/views/users/show.html.haml

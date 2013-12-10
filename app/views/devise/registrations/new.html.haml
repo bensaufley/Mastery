@@ -21,6 +21,15 @@
   .form-group
     = f.label :password_confirmation, class: 'sr-only'
     = f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'form-control'
-  .pull-right= f.submit "Sign up", class: 'btn btn-default'
+  .form-group
+    .input-group
+      %span.input-group-addon
+        = f.check_box :visible
+      = f.label :visible, class: 'form-control'
+    %p.help-block
+      If you choose to make your account private, you will not be able to add friends and share with them.
+      %strong Note:
+      You can choose to make some or all of your activities private while maintaining a public account.
+  .pull-right= f.submit 'Sign up', class: 'btn btn-primary'
 .col-md-6.col-md-offset-3
-  = render "devise/shared/links"
+  = render 'devise/shared/links'

@@ -1,7 +1,11 @@
 Mastery::Application.routes.draw do
 
   devise_for :users
-  root to: "static_pages#home"
+
+  resources :users, only: [ :index ]
+  resources :users, path: '/', only: [ :show, :destroy ]
+  resources :activities, path: ':username/activities'
+  root to: 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

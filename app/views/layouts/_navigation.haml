@@ -8,8 +8,8 @@
 .collapse.navbar-collapse
   %ul.nav.navbar-nav.navbar-right
     - if user_signed_in?
-      %li=link_to 'Log Out', destroy_user_session_path, method: 'delete'
       %li=link_to 'Edit Account', edit_user_registration_path
+      %li=link_to 'Log Out', destroy_user_session_path, method: 'delete'
     - else
       %li.dropdown
         %a.dropdown-toggle{ 'data-toggle' => 'dropdown', href: '#' }
@@ -24,9 +24,9 @@
             .form-group
               = password_field_tag 'user[password]', '', placeholder: 'Password', class: 'form-control'
             .checkbox
-              = label_tag class: 'form-control' do
-                = check_box_tag 'user[remember_me]', class: 'form-control'
+              %label
+                = check_box_tag 'user[remember_me]'
                 Remember Me
-            %button.btn.btn-default.pull-right Sign in
+            %button.btn.btn-primary.pull-right Sign in
           %p= link_to "Forgot your password?", new_password_path('user')
       %li=link_to 'Sign Up', new_user_registration_path
