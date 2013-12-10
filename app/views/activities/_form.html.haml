@@ -11,7 +11,7 @@
     = f.text_field :name, placeholder: 'Name', class: 'form-control'
   .form-group
     = f.label :type, class: 'sr-only'
-    = f.select :type, options_for_select(Activity::TYPES.map{|x| [x.titleize,x]}, 'timed'), {}, class: 'form-control'
+    = f.select :type, options_for_select(Activity::TYPES.map{|x| [x.titleize,x]}, @activity[:type]), {}, class: 'form-control'
   .form-group.input-group
     %span.input-group-addon
       = f.check_box :private

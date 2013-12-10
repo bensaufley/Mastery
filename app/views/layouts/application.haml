@@ -3,9 +3,9 @@
   %head
     %meta{ name: 'viewport', content: 'initial-scale=1, maximum-scale=1' }
     %title Mastery
-    = stylesheet_link_tag    "application", media: "all"
+    = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
-    = surround '<!--[if lt IE 9]>'.html_safe, '<![endif]-->'.html_safe do
+    / [if lt IE 9]
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       -# <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
   %body
@@ -14,14 +14,15 @@
         =render 'layouts/navigation'
     %main{ role: 'main' }
       .container
-        %header.page-header
+        %header.page-header.clearfix
           = content_tag(:h1, content_for(:title))    if content_for? :title
           = content_tag(:h4, content_for(:subtitle)) if content_for? :subtitle
+        - if !flash.empty?
+          .row
+            .col-md-12=render 'layouts/notifications'
         .row
-          %div{ class: (!flash.empty? ? 'col-md-8' : 'col-md-12' )}
+          %div{ class: 'col-md-12' }
             = yield
-          - if !flash.empty?
-            .col-md-4=render 'layouts/notifications'
     %footer
       .container
         %p Copyright ©2013 Ben Saufley

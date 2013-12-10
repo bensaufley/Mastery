@@ -1,15 +1,7 @@
-%p#notice= notice
+- content_for :title, @activity.name.titleize
+- content_for :subtitle, "#{@activity.private? ? "Private" : "Public"} #{@activity.type.titleize} Activity (#{link_to '@'+@user.username, @user})".html_safe
 
-%p
-  %b Name:
-  = @activity.name
-%p
-  %b Type:
-  = @activity.type
-%p
-  %b Private:
-  = @activity.private
 
-= link_to 'Edit', edit_activity_path(@activity)
-\|
-= link_to 'Back', activities_path
+= link_to edit_activity_path(@activity.user,@activity), class: 'btn btn-default' do
+  %span.glyphicon.glyphicon-pencil
+  Edit

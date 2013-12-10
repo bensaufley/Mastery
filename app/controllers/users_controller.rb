@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     end
     def visible_user
       if !@user.try(:visible?)
-        flash[:error] = "User #{params[:id]} does not exist, or is a private user."
+        flash[:error] = "User <strong>#{params[:id]}</strong> does not exist, or is a private user.".html_safe
         redirect_to root_url unless current_user && (current_user == @user || current_user.admin?)
       end
     end

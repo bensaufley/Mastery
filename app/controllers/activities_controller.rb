@@ -17,6 +17,7 @@ class ActivitiesController < ApplicationController
   # GET /user/:user_id/activities/new
   def new
     @activity = Activity.new
+    @activity[:type] ||= params[:type]
   end
 
   # GET /user/:user_id/activities/1/edit
@@ -30,7 +31,7 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
+        format.html { redirect_to activity_url(@user,@activity), notice: 'Activity was successfully created.' }
         format.json { render action: 'show', status: :created, location: @activity }
       else
         format.html { render action: 'new' }
@@ -44,7 +45,7 @@ class ActivitiesController < ApplicationController
   def update
     respond_to do |format|
       if @activity.update(activity_params)
-        format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
+        format.html { redirect_to activity_url(@user,@activity), notice: 'Activity was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
