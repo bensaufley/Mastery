@@ -6,8 +6,8 @@ Mastery::Application.routes.draw do
   resources :users, path: '/', only: [ :show, :destroy ]
   resources :activities, path: ':username/activities' do
     resources :instances, only: [ :show, :update, :destroy ]
-    match 'start', to: 'instances#create', via: [ :get, :post ]
-    match 'tally', to: 'instances#create', via: [ :get, :post ]
+    match 'start', to: 'instances#create', via: [ :get, :post ], instance: { type: 'Timed' }
+    match 'tally', to: 'instances#create', via: [ :get, :post ], instance: { type: 'Counted' }
     match 'stop', to: 'instances#stop', via: [ :get, :post ]
   end
   root to: 'static_pages#home'
