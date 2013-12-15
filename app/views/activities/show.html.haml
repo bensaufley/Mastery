@@ -1,7 +1,10 @@
 - content_for :title, @activity.name.titleize
 - content_for :subtitle, "#{@activity.private? ? "Private" : "Public"} #{@activity.type.titleize} Activity (#{link_to '@'+@user.username, @user})".html_safe
 
-
-= link_to edit_activity_path(@activity.user,@activity), class: 'btn btn-default' do
-  %span.glyphicon.glyphicon-pencil
-  Edit
+.row
+  .col-md-4
+    = link_to edit_activity_path(@activity.user,@activity), class: 'btn btn-default' do
+      %span.glyphicon.glyphicon-pencil
+      Edit
+  .col-md-8
+    = render 'instances/timed_list', locals: { activity: @activity }

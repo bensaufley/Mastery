@@ -1,7 +1,11 @@
-class TimedInstance < Instance
+class Timed < Instance
   validates :started, presence: true
 
-  before_save :start, on: :create
+  before_validation :start, if: :new_record?
+
+  def done?
+    done != nil
+  end
 
   def stop
     raise 'Cannot stop an instance on creation' if self.new_record?
@@ -10,16 +14,22 @@ class TimedInstance < Instance
         raise 'Cannot end an already-ended instance.'
       else
         self.done = Time.now
+        self.save
       end
     else
       raise 'Cannot end an instance that has not started.'
     end
   end
 
-  private
+  def start
+    raise 'Already started!' if self.activity.started?
+    self.started = Time.now
+  end
 
-    def start
-      self.started = Time.now
+  def self.stop
+    where(done: nil).each do |i|
+      i.stop
     end
+  end
 
 end

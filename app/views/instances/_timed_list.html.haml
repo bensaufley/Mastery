@@ -1,0 +1,17 @@
+%ul
+  - if @activity.timeds.empty?
+    %li
+      There are no timeds of #{@activity.name} yet.
+      = link_to 'Create one?', activity_start_path(@user, @activity)
+  - @activity.timeds .each do |i|
+    %li{ title: i.started.strftime("%Y.%m.%d %R") + (i.done? ? " for #{distance_of_time_in_words(i.done,i.started)}" : " – ongoing")}
+      - if i.started > Time.now - 1.week
+        = distance_of_time_in_words_to_now(i.started)
+        = i.started < Time.now ? 'ago' : 'from now'
+      - if i.done?
+        - if i.done > Time.now - 1.week
+          for
+          = distance_of_time_in_words(i.done,i.started)
+      - else
+        = link_to 'Stop', activity_stop_path(@user,@activity)
+      = link_to 'Delete', activity_instance_path(@user,@activity,i), method: :delete, data: {confirm: 'Are you sure you wish to delete this instance?'}

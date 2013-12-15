@@ -1,4 +1,4 @@
-class CountedInstance < Instance
+class Counted < Instance
   validates :tallied, presence: true
   before_save :tally, on: :create
 

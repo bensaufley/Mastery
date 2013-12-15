@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action :set_activity, only: [:stop, :show, :edit, :update, :destroy]
   before_action :set_user
   before_filter :authenticate_user!
 
@@ -40,6 +40,19 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  # PUT/GET /user/:user_id/activities/1/stop
+  def stop
+    respond_to do |format|
+      if @activity.stop
+        format.html { redirect_to activity_url(@user,@activity), notice: 'Activity was successfully stopped.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @activity.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /user/:user_id/activities/1
   # PATCH/PUT /user/:user_id/activities/1.json
   def update
@@ -67,7 +80,7 @@ class ActivitiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_activity
-      @activity = Activity.find(params[:id])
+      @activity = Activity.find(params[:id] || params[:activity_id])
     end
 
     def set_user

@@ -8,7 +8,7 @@ Mastery::Application.routes.draw do
     resources :instances, only: [ :show, :update, :destroy ]
     match 'start', to: 'instances#create', via: [ :get, :post ], instance: { type: 'Timed' }
     match 'tally', to: 'instances#create', via: [ :get, :post ], instance: { type: 'Counted' }
-    match 'stop', to: 'instances#stop', via: [ :get, :post ]
+    match 'stop', to: 'activities#stop', via: [ :get, :post ]
   end
   root to: 'static_pages#home'
 
