@@ -4,7 +4,12 @@ Mastery::Application.routes.draw do
 
   resources :users, only: [ :index ]
   resources :users, path: '/', only: [ :show, :destroy ]
-  resources :activities, path: ':username/activities'
+  resources :activities, path: ':username/activities' do
+    resources :instances, only: [ :show, :update, :destroy ]
+    match 'start', to: 'instances#create', via: [ :get, :post ]
+    match 'tally', to: 'instances#create', via: [ :get, :post ]
+    match 'stop', to: 'instances#stop', via: [ :get, :post ]
+  end
   root to: 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
