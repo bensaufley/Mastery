@@ -1,6 +1,6 @@
 class Counted < Instance
-  validates :tallied, presence: true
-  before_save :tally, on: :create
+  validates :done, presence: true
+  before_validation :tally, if: :new_record?
 
   private
 

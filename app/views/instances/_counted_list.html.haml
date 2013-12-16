@@ -1,0 +1,24 @@
+%ul.list-group
+  - if @activity.counteds.empty?
+    %li.list-group-item
+      There are no counts of #{@activity.name} yet.
+      = link_to 'Create one?', activity_tally_path(@user, @activity)
+  - @activity.counteds.order('started DESC, done DESC').each do |i|
+    %li.list-group-item.clearfix{ title: i.done.strftime("%Y.%m.%d %R") }
+      .col-md-8
+        %h4
+          - if i.done > Time.now - 1.week
+            = distance_of_time_in_words_to_now(i.done)
+            = i.done < Time.now ? 'ago' : 'from now'
+          - else
+            on
+            - if i.done.year == Time.now.year
+              = i.done.strftime("%B %-d at %-I:%M:%S%p")
+            - else
+              = i.done.strftime("%B %-d, %Y, at %-I:%M:%S%p")
+      .col-md-4
+        .btn-group.btn-group-justified
+          = link_to 'Delete', activity_instance_path(@user,@activity,i), method: :delete, data: {confirm: 'Are you sure you wish to delete this instance?'}, class: 'btn btn-danger', type: 'button'
+- if @activity.stopped?
+  .panel-footer.btn-group.btn-group-justified
+    = link_to 'Count', activity_tally_path(@user,@activity), class: 'btn btn-primary'

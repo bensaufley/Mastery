@@ -1,10 +1,30 @@
 - content_for :title, @activity.name.titleize
-- content_for :subtitle, "#{@activity.private? ? "Private" : "Public"} #{@activity.type.titleize} Activity (#{link_to '@'+@user.username, @user})".html_safe
+- content_for :subtitle do
+  = @activity.private? ? "Private" : "Public"
+  = @activity.type.titleize
+  Activity
+  = surround '(',')' do
+    =link_to '@'+@user.username, @user
 
 .row
   .col-md-4
-    = link_to edit_activity_path(@activity.user,@activity), class: 'btn btn-default' do
-      %span.glyphicon.glyphicon-pencil
-      Edit
+    - if @activity.type.downcase=='timed'
+      %h3.time-spent{data: { 'diff-format' => '%H'}}= @activity.time_spent('%H')[:diff]
+      %h4.time-spent
+        = surround '(',')' do
+          = @activity.time_spent[:diff]
+    - else
+      %h4.tally
+        = pluralize(@activity.counteds.length,'time')
+    .btn-group.btn-group-justified
+      -# TODO: SET UP GOALS ARCHITECTURE
+      = link_to '#', class: 'btn btn-info' do
+        %span.glyphicon.glyphicon-signal
+        Set Goals
+      = link_to edit_activity_path(@activity.user,@activity), class: 'btn btn-default' do
+        %span.glyphicon.glyphicon-pencil
+        Edit
   .col-md-8
-    = render 'instances/timed_list', locals: { activity: @activity }
+    .panel.panel-default
+      .panel-heading Recent activity
+      = render "instances/#{@activity.type.downcase}_list", locals: { activity: @activity }

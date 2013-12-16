@@ -3,18 +3,13 @@ class Timed < Instance
 
   before_validation :start, if: :new_record?
 
-  def done?
-    done != nil
-  end
-
   def stop
-    raise 'Cannot stop an instance on creation' if self.new_record?
-    if started?
-      if done?
+    raise 'Cannot stop an instance on creation.' if self.new_record?
+    if self.started?
+      if self.done?
         raise 'Cannot end an already-ended instance.'
       else
-        self.done = Time.now
-        self.save
+        self.update_attribute(:done, Time.now)
       end
     else
       raise 'Cannot end an instance that has not started.'
@@ -22,12 +17,23 @@ class Timed < Instance
   end
 
   def start
-    raise 'Already started!' if self.activity.started?
+    raise 'Already started!' if self.activity.running?
     self.started = Time.now
   end
 
+  def time_spent
+    Time.diff(done || Time.now,started,'%h:%m:%s')[:diff]
+  end
+
+
+  def self.completed
+    where('`done` IS NOT NULL')
+  end
+  def self.incomplete
+    where(done: nil)
+  end
   def self.stop
-    where(done: nil).each do |i|
+    incomplete.each do |i|
       i.stop
     end
   end

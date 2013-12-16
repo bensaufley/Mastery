@@ -22,4 +22,16 @@ class Activity < ActiveRecord::Base
   def stop
     timeds.stop
   end
+
+  def total_count
+    counteds.length
+  end
+
+  def time_spent(format = '%d, %H and %N')
+    sum = 0
+    timeds.each do |i|
+      sum += (i.done || Time.now) - i.started
+    end
+    Time.diff(Time.now - sum,Time.now,format)
+  end
 end

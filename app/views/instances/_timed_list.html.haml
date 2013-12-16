@@ -1,17 +1,31 @@
-%ul
+%ul.list-group
   - if @activity.timeds.empty?
-    %li
-      There are no timeds of #{@activity.name} yet.
+    %li.list-group-item
+      There are no instances of #{@activity.name} yet.
       = link_to 'Create one?', activity_start_path(@user, @activity)
-  - @activity.timeds .each do |i|
-    %li{ title: i.started.strftime("%Y.%m.%d %R") + (i.done? ? " for #{distance_of_time_in_words(i.done,i.started)}" : " – ongoing")}
-      - if i.started > Time.now - 1.week
-        = distance_of_time_in_words_to_now(i.started)
-        = i.started < Time.now ? 'ago' : 'from now'
-      - if i.done?
-        - if i.done > Time.now - 1.week
-          for
-          = distance_of_time_in_words(i.done,i.started)
-      - else
-        = link_to 'Stop', activity_stop_path(@user,@activity)
-      = link_to 'Delete', activity_instance_path(@user,@activity,i), method: :delete, data: {confirm: 'Are you sure you wish to delete this instance?'}
+  - @activity.timeds.order('started DESC, done DESC').each do |i|
+    %li.list-group-item.clearfix{ title: i.started.strftime("%Y.%m.%d %R") + (i.done? ? " (#{i.time_spent})" : " – ongoing"), class: i.done? ? '' : 'active' }
+      .col-md-8
+        %h4
+          Started
+          - if i.started > Time.now - 1.week
+            = distance_of_time_in_words_to_now(i.started)
+            = i.started < Time.now ? 'ago' : 'from now'
+          - else
+            on
+            - if i.started.year == Time.now.year
+              = i.started.strftime("%B %-d at %-I:%M:%S%p")
+            - else
+              = i.started.strftime("%B %-d, %Y, at %-I:%M:%S%p")
+        - if i.done?
+          %p
+            For
+            = distance_of_time_in_words(i.done,i.started)
+      .col-md-4
+        .btn-group.btn-group-justified
+          - if !i.done?
+            = link_to 'Stop', activity_stop_path(@user,@activity), class: 'btn btn-warning', type: 'button'
+          = link_to 'Delete', activity_instance_path(@user,@activity,i), method: :delete, data: {confirm: 'Are you sure you wish to delete this instance?'}, class: 'btn btn-danger', type: 'button'
+- if @activity.stopped?
+  .panel-footer.btn-group.btn-group-justified
+    = link_to 'Start', activity_start_path(@user,@activity), class: 'btn btn-primary'
