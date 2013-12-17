@@ -14,15 +14,21 @@
         =render 'layouts/navigation'
     %main{ role: 'main' }
       .container
-        %header.page-header.clearfix
-          = content_tag(:h1, content_for(:title))    if content_for? :title
-          = content_tag(:h4, content_for(:subtitle)) if content_for? :subtitle
-        - if !flash.empty?
-          .row
-            .col-md-12=render 'layouts/notifications'
         .row
-          %div{ class: 'col-md-12' }
-            = yield
+          .col-md-4
+            %header
+              = content_tag(:h1, content_for(:title))    if content_for? :title
+              = content_tag(:h4, content_for(:subtitle)) if content_for? :subtitle
+            %section
+              = content_for(:left)
+          .col-md-8
+            - if !flash.empty?
+              =render 'layouts/notifications'
+            .panel.panel-primary
+              - if content_for? :content_header
+                .panel-heading
+                  %h3= content_for(:content_header)
+              = yield
     %footer
       .container
         %p Copyright ©2013 Ben Saufley
