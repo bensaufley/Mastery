@@ -18,11 +18,11 @@
         = pluralize(@activity.counteds.length,'time')
     .btn-group.btn-group-justified
       -# TODO: SET UP GOALS ARCHITECTURE
-      = link_to '#', class: 'btn btn-info' do
-        %span.glyphicon.glyphicon-signal
+      = link_to '#', class: 'button secondary' do
+        %i.fi-graph-bar
         Set Goals
-      = link_to edit_activity_path(@activity.user,@activity), class: 'btn btn-default' do
-        %span.glyphicon.glyphicon-pencil
+      = link_to edit_activity_path(@activity.user,@activity), class: 'button' do
+        %i.fi-pencil
         Edit
   .col-md-8
     .panel.panel-default

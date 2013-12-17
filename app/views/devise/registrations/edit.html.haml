@@ -3,10 +3,10 @@
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { :method => :put, class: 'form-group col-md-6 col-md-offset-3', role: 'form' }) do |f|
   = devise_error_messages!
   .row.collapse
-    .small-2.columns
+    =f.label :username
+    .small-1.columns
       %span.prefix.radius @
-    -#= f.label :username, class: 'sr-only'
-    .small-10.columns
+    .small-11.columns
       = f.text_field :username, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Desired Username', class: 'form-control'
   .row.collapse
     .small-6.columns
@@ -15,25 +15,28 @@
     .small-6.columns
       = f.label :last_name, class: 'sr-only'
       = f.text_field :last_name, class: 'form-control', autocapitalize: false, autocorrect: false, placeholder: 'Last Name'
-  .form-group
+  .row.collapse
     = f.label :email, class: 'sr-only'
     = f.email_field :email, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Email', class: 'form-control'
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %p.help-block
+    %small
       Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .form-group
-    = f.label :password, 'Change password'
-    %p.help-block (leave blank if you don't want to change it)
-    = f.password_field :password, placeholder: 'Password', class: 'form-control', autocomplete: 'off'
-  .form-group
-    = f.label :password_confirmation, class: 'sr-only'
-    = f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'form-control'
-  .form-group
-    = f.label :current_password
-    %p.help-block (we need your current password to confirm your changes)
-    = f.password_field :current_password, placeholder: 'Current Password', class: 'form-control'
-  .pull-right= f.submit 'Update', class: 'btn btn-primary'
-
+  %fieldset
+    %legend Change Password
+    .row.collapse
+      = f.label :password, 'New password'
+      = f.password_field :password, placeholder: 'Password', class: 'form-control', autocomplete: 'off'
+    .row.collapse
+      = f.label :password_confirmation, 'Confirm new password', class: 'sr-only'
+      = f.password_field :password_confirmation, placeholder: 'Confirm New Password', class: 'form-control'
+  .row.collapse
+    = f.label :current_password do
+      Current password
+      %small Required to confirm changes
+    .medium-9.columns
+      = f.password_field :current_password, placeholder: 'Current Password', class: 'form-control', required: true
+    .medium-3.columns
+      = f.submit 'Update Profile', class: 'button primary expand postfix radius'
 
 %hr
 %section
