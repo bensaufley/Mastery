@@ -7,7 +7,7 @@
     =link_to '@'+@user.username, @user
 
 .row
-  .col-md-4
+  .medium-4.columns
     - if @activity.type.downcase=='timed'
       %h3.time-spent{data: { 'diff-format' => '%H'}}= @activity.time_spent('%H')[:diff]
       %h4.time-spent
@@ -24,7 +24,6 @@
       = link_to edit_activity_path(@activity.user,@activity), class: 'button' do
         %i.fi-pencil
         Edit
-  .col-md-8
-    .panel.panel-default
-      .panel-heading Recent activity
-      = render "instances/#{@activity.type.downcase}_list", locals: { activity: @activity }
+  %section.medium-8.columns
+    %h2 Recent activity
+    = render "instances/#{@activity.type.downcase}_list", locals: { activity: @activity }
