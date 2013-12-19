@@ -16,7 +16,7 @@
     - else
       %h4.tally
         = pluralize(@activity.counteds.length,'time')
-    .btn-group.btn-group-justified
+    .button-group
       -# TODO: SET UP GOALS ARCHITECTURE
       = link_to '#', class: 'button secondary' do
         %i.fi-graph-bar

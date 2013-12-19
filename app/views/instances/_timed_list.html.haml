@@ -1,34 +1,38 @@
-- if @activity.timeds.empty?
-  .row.list-group-item
-    There are no instances of #{@activity.name} yet.
-    = link_to 'Create one?', activity_start_path(@user, @activity)
-- @activity.timeds.order('started DESC, done DESC').each do |i|
-  .row{ title: i.started.strftime("%Y.%m.%d %R") + (i.done? ? " (#{i.time_spent})" : " – ongoing"), class: i.done? ? '' : 'active' }
-    .small-8.medium-10.columns
-      %h3
-        - if i.started > Time.now - 1.week
-          = distance_of_time_in_words_to_now(i.started)
-          = i.started < Time.now ? 'ago' : 'from now'
-        - else
-          on
-          - if i.started.year == Time.now.year
-            = i.started.strftime("%B %-d at %-I:%M:%S%p")
+.activity-listing
+  - if @activity.timeds.empty?
+    .row
+      .small-8.columns
+        There are no instances of #{@activity.name} yet.
+      .small-4.columns
+        = link_to 'Create one?', activity_start_path(@user, @activity), class: 'button expand'
+  - @activity.timeds.order('started DESC, done DESC').each do |i|
+    .row{ title: i.started.strftime("%Y.%m.%d %R") + (i.done? ? " (#{i.time_spent})" : " – ongoing"), class: i.done? ? '' : 'active' }
+      .small-8.medium-10.columns
+        %h3
+          - if i.started > Time.now - 1.week
+            = distance_of_time_in_words_to_now(i.started,true).capitalize
+            = i.started < Time.now ? 'ago' : 'from now'
           - else
-            = i.started.strftime("%B %-d, %Y, at %-I:%M:%S%p")
-        - if i.done?
-          %small
-            For
-            = distance_of_time_in_words(i.done,i.started)
-    .small-4.medium-2.columns
-      - if !i.done?
-        = link_to activity_stop_path(@user,@activity), class: 'small button expand', type: 'button' do
-          %i.fi-stop
-          Stop
-      - else
-        = link_to activity_instance_path(@user,@activity,i), method: :delete, data: {confirm: 'Are you sure you wish to delete this instance?'}, class: 'small button expand alert', type: 'button' do
-          %i.fi-x
-          Delete
+            on
+            - if i.started.year == Time.now.year
+              = i.started.strftime("%B %-d at %-I:%M:%S%p")
+            - else
+              = i.started.strftime("%B %-d, %Y, at %-I:%M:%S%p")
+          - if i.done?
+            %small
+              For
+              = distance_of_time_in_words(i.done,i.started,true)
+      .small-4.medium-2.columns.button-group
+        - if !i.done?
+          = link_to activity_stop_path(@user,@activity), class: 'button expand', type: 'button' do
+            %i.fi-stop
+            Stop
+        - else
+          = link_to activity_instance_path(@user,@activity,i), method: :delete, data: {confirm: 'Are you sure you wish to delete this instance?'}, class: 'button expand alert', type: 'button' do
+            %i.fi-x
+            Delete
 - if @activity.stopped?
-  = link_to activity_start_path(@user,@activity), class: 'large button expand' do
-    %i.fi-play
-    Start
+  .row.button-group
+    = link_to activity_start_path(@user,@activity), class: 'large button expand' do
+      %i.fi-play
+      Start
