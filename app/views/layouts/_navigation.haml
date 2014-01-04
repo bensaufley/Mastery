@@ -1,8 +1,12 @@
-.fixed
+.contain-to-grid.sticky
   %nav.top-bar.hide-for-small{ role: 'navigation', data: { topbar: true } }
     %ul.title-area
       %li.name
-        %h1=link_to 'mastery', root_path, class: 'navbar-brand'
+        %h1
+          =link_to root_path, class: 'navbar-brand' do
+            - if user_signed_in?
+              mastery
+              %i.fi-home
     %section.top-bar-section
       %ul.right
         - if user_signed_in?
@@ -93,5 +97,18 @@
     %p.right= link_to 'Forgot your password?', new_password_path('user')
 %aside.left-off-canvas-menu
   %ul.off-canvas-list
-    %li=link_to 'mastery', root_path
+    - if user_signed_in?
+      %li
+        = link_to root_path do
+          %i.fi-home
+          Home
+      %li
+        %label
+      %li= link_to 'sign out', destroy_user_session_path, method: :delete
+    - else
+      %li= link_to 'mastery', root_path
+      %li
+        %label
+      %li= link_to 'sign in', new_user_session_path
+      %li= link_to 'sign up', new_user_registration_path
 %a.exit-off-canvas{href: '#'}
