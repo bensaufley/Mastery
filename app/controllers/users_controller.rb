@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [ :show  ]
   before_filter :visible_user, only: [ :show ]
 
+  layout 'static'
+
   def index
     @users = User.where(:visible).order('username ASC')
   end

@@ -15,29 +15,12 @@
 @import "shared";
 $font-size-base: 16px;
 @import "bootstrap";
-body { padding-top: 60px; }
 @import "bootstrap/theme";
 
-header.navbar-fixed-top .dropdown-menu {
-  padding: 10px;
-  min-width: 320px;
-  max-width: 100%;
-  @include box-sizing(border-box);
-}
+@import 'nav';
 
-.navbar .primary {
-  background-color: $btn-primary-bg;
-  & > * {
-    color: #fff !important;
-    @include text-shadow(0 -1px 1px $btn-primary-border);
-    * {
-      @include text-shadow(none);
-    }
-  }
-  .caret {
-    border-top-color: #fff !important;
-    border-bottom-color: #fff !important;
-  }
+body {
+  padding-top: 51px;
 }
 
 .inline {
