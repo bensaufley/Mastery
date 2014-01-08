@@ -14,18 +14,24 @@
 
 @import 'shared';
 
-// $primary-color: #ffcc22;
-// $secondary-color: #441177;
 $include-open-sans: false;
 $default-border-radius: 2px;
+$header-font-family: 'IM Fell French Canon', serif;
+$paragraph-font-family: sans-serif;
+$paragraph-font-weight: 200;
+
+$primary-color: #c34900;
+$secondary-color: #00B1B2;
 
 @import 'foundation';
 
-header.navbar-fixed-top .dropdown-menu {
-  padding: 10px;
-  min-width: 320px;
-  max-width: 100%;
-  @include box-sizing(border-box);
+html, body {
+  font-family: $paragraph-font-family;
+  font-weight: $paragraph-font-weight;
 }
 
+@import 'nav';
 @import 'activities';
+@import 'jumbotron';
+
+@import 'footer';

@@ -1,0 +1,21 @@
+!!!
+%html
+  = render 'layouts/head'
+  %body.jt{ class: body_classes }
+    .off-canvas-wrap
+      .inner-wrap
+        =render 'layouts/navigation'
+        %header.jumbotron
+          .row
+            .small-12.medium-6.columns
+              = content_for :jumbotron
+        %main{ role: 'main' }
+          - if !flash.empty?
+            .row
+              .small-12.columns=render 'layouts/notifications'
+          = yield
+        %footer
+          .row
+            %p.center
+              %small Copyright ©2013 Ben Saufley
+    = javascript_include_tag 'application'

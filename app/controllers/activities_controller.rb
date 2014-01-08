@@ -12,6 +12,7 @@ class ActivitiesController < ApplicationController
   # GET /user/:user_id/activities/1
   # GET /user/:user_id/activities/1.json
   def show
+    layout 'jumbotron'
   end
 
   # GET /user/:user_id/activities/new
