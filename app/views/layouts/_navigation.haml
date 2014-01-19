@@ -61,7 +61,8 @@
                       Create counted Activity
 
               - else
-                %li.dropdown-header{role: 'presentation'} You do not have any Activities yet.
+                %li
+                  %label You do not have any Activities yet.
                 %li
                   = link_to new_activity_path(current_user) do
                     Create one
