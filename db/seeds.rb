@@ -12,5 +12,6 @@ User.create(
     first_name: 'Ben',
     last_name: 'Saufley',
     password: 'Password1$',
-    username: 'bensaufley'
+    username: 'bensaufley',
+    confirmed_at: Time.now
 )

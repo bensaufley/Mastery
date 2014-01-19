@@ -7,7 +7,7 @@ gem 'rails', '4.0.1'
 gem 'pg'
 
 # Assets
-gem 'compass-rails', '~> 2.0.alpha.0'
+gem 'compass-rails'
 gem 'sass-rails', '~> 4.0.0'
 gem 'foundation-rails'
 gem 'uglifier', '>= 1.3.0'
