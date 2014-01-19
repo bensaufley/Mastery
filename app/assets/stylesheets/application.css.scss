@@ -8,30 +8,20 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require foundation-icons
  *= require_self
- *= require_tree ./includes
  */
 
 @import 'shared';
-
-$include-open-sans: false;
-$default-border-radius: 2px;
-$header-font-family: 'IM Fell French Canon', serif;
-$paragraph-font-family: sans-serif;
-$paragraph-font-weight: 200;
-
-$primary-color: #c34900;
-$secondary-color: #00B1B2;
-
+@import 'foundation-setup';
 @import 'foundation';
 
-html, body {
-  font-family: $paragraph-font-family;
-  font-weight: $paragraph-font-weight;
-}
+@import 'base';
 
 @import 'nav';
-@import 'activities';
 @import 'jumbotron';
 
 @import 'footer';
+
+@import 'users';
+@import 'activities';

@@ -1,6 +1,7 @@
 - content_for :title, 'Sign up'
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { class: 'medium-8 medium-centered columns', role: 'form' }) do |f|
   = devise_error_messages!
+  = f.label :username, class: 'sr-only'
   .row.collapse
     .small-2.columns
       %span.prefix.radius @
@@ -8,11 +9,16 @@
       = f.text_field :username, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Desired Username', class: 'form-control'
   .row.collapse
     .medium-6.columns
+      = f.label :first_name, class: 'sr-only'
       = f.text_field :first_name, autofocus: true, class: 'form-control ', autocapitalize: false, autocorrect: false, placeholder: 'First Name'
     .medium-6.columns
+      = f.label :last_name, class: 'sr-only'
       = f.text_field :last_name, class: 'form-control', autocapitalize: false, autocorrect: false, placeholder: 'Last Name'
+  = f.label :email, class: 'sr-only'
   = f.email_field :email, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Email', class: 'form-control'
+  = f.label :password, class: 'sr-only'
   = f.password_field :password, placeholder: 'Password', class: 'form-control'
+  = f.label :password_confirmation, class: 'sr-only'
   = f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'form-control'
   = f.check_box :visible
   = f.label :visible, class: 'form-control'
