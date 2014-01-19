@@ -1,10 +1,13 @@
-- content_for :title, @activity.name.titleize
-- content_for :subtitle do
-  = @activity.private? ? "Private" : "Public"
-  = @activity.type.titleize
-  Activity
-  = surround '(',')' do
-    =link_to '@'+@user.username, @user
+- content_for :jumbotron do
+  %h1
+    = @activity.name.titleize
+    %br
+    %small
+      = @activity.private? ? "Private" : "Public"
+      = @activity.type.titleize
+      Activity
+      = surround '(',')' do
+        =link_to '@'+@user.username, @user
 
 .row
   .medium-4.columns
@@ -18,7 +21,7 @@
         = pluralize(@activity.counteds.length,'time')
     .button-group
       -# TODO: SET UP GOALS ARCHITECTURE
-      = link_to '#', class: 'button secondary' do
+      = link_to '#', class: 'button secondary has-tip', title: 'Coming Soon', data: { tooltip: true } do
         %i.fi-graph-bar
         Set Goals
       = link_to edit_activity_path(@activity.user,@activity), class: 'button' do

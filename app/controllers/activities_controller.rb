@@ -2,6 +2,7 @@ class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:stop, :show, :edit, :update, :destroy]
   before_action :set_user
   before_filter :authenticate_user!
+  layout 'jumbotron', only: [:show]
 
   # GET /user/:user_id/activities
   # GET /user/:user_id/activities.json
@@ -12,7 +13,7 @@ class ActivitiesController < ApplicationController
   # GET /user/:user_id/activities/1
   # GET /user/:user_id/activities/1.json
   def show
-    layout 'jumbotron'
+
   end
 
   # GET /user/:user_id/activities/new
