@@ -1,0 +1,26 @@
+header.jumbotron {
+  margin-bottom: rem-calc(10);
+  border-bottom: 1px solid $shiny-edge-color;
+  @include responsive-bg('fireplace.jpg');
+  background-position: right bottom;
+  @media #{$large-up}, #{$retina} {
+    background-position: center 75%;
+  }
+  @include grid-column(12);
+  @include box-shadow(0 6px 12px rgba(0,0,0,.6) inset);
+  .columns {
+    background: rgba(0,0,0,.7);
+    height: 100%;
+    @include text-shadow(0 2px 4px rgba(0,0,0,.6));
+    @media #{$medium-up} {
+      min-height: 200px;
+      padding-top: 60px;
+      body.static_pages & {
+        min-height: 400px;
+      }
+    }
+    &, * {
+      color: #fff !important;
+    }
+  }
+}

@@ -1,1 +1,19 @@
 @import "compass";
+
+$retina: unquote("only screen and (-webkit-min-device-pixel-ratio: 1.3),
+  only screen and (min--moz-device-pixel-ratio:1.5),
+  only screen and (-o-device-pixel-ratio: 13/10),
+  only screen and (min-resolution: 120dpi)");
+
+@mixin responsive-bg($image, $cover: true) {
+  background-image: image-url($image);
+  @if $cover {
+    background-size: cover;
+  }
+  @media #{$large-up}, #{$retina} {
+    background-image: image-url("large/#{$image}");
+  }
+  @media #{$small-only} {
+    background-image: image-url("small/#{$image}");
+  }
+}

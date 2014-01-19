@@ -6,24 +6,24 @@
   = surround '(',')' do
     =link_to '@'+@user.username, @user
 
-- content_for :left do
-  - if @activity.type.downcase=='timed'
-    %h3.time-spent{data: { 'diff-format' => '%H'}}= @activity.time_spent('%H')[:diff]
-    %h4.time-spent
-      = surround '(',')' do
-        = @activity.time_spent[:diff]
-  - else
-    %h4.tally
-      = pluralize(@activity.counteds.length,'time')
-  .btn-group.btn-group-justified
-    -# TODO: SET UP GOALS ARCHITECTURE
-    = link_to '#', class: 'btn btn-info' do
-      %span.glyphicon.glyphicon-signal
-      Set Goals
-    = link_to edit_activity_path(@activity.user,@activity), class: 'btn btn-default' do
-      %span.glyphicon.glyphicon-pencil
-      Edit
-
-- content_for :content_header, 'Recent activity'
-
-= render "instances/#{@activity.type.downcase}_list", locals: { activity: @activity }
+.row
+  .medium-4.columns
+    - if @activity.type.downcase=='timed'
+      %h3.time-spent{data: { 'diff-format' => '%H'}}= @activity.time_spent('%H')[:diff]
+      %h4.time-spent
+        = surround '(',')' do
+          = @activity.time_spent[:diff]
+    - else
+      %h4.tally
+        = pluralize(@activity.counteds.length,'time')
+    .button-group
+      -# TODO: SET UP GOALS ARCHITECTURE
+      = link_to '#', class: 'button secondary' do
+        %i.fi-graph-bar
+        Set Goals
+      = link_to edit_activity_path(@activity.user,@activity), class: 'button' do
+        %i.fi-pencil
+        Edit
+  %section.medium-8.columns
+    %h2 Recent activity
+    = render "instances/#{@activity.type.downcase}_list", locals: { activity: @activity }

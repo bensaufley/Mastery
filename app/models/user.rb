@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
          :confirmable
 
   has_many :activities
+  has_many :instances, through: :activities
+  has_many :counteds, through: :activities
+  has_many :timeds, through: :activities
   
   validates :username, :first_name, :last_name, presence: true
   validates :username, format: { with: /[A-Z][A-Z0-9\-_]{6,}/i }

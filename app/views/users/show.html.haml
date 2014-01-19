@@ -1,3 +1,17 @@
 - content_for :jumbotron do
-  :markdown
-    # #{@user.first_name} #{@user.last_name} <small>([@#{@user.username}](#{user_path(@user)}))</small>
+  %h1
+    #{@user.first_name} #{@user.last_name}
+    %small
+      = surround '(',')' do
+        = link_to("@#{@user.username}", @user)
+  %p Find me in app/views/users/show.html.haml
+
+.row
+  .medium-4.columns
+    %h2.right Recent Activity
+  .medium-8.columns
+    %ul.activity-listing
+      - if @user.instances.empty?
+        %li You have not recorded an activity yet
+      - else
+        %li you have

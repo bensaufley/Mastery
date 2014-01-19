@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    layout 'jumbotron'
     if @user == current_user
       redirect_to root_url
     end

@@ -8,21 +8,20 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require foundation-icons
  *= require_self
- *= require_tree ./includes
  */
 
-@import "shared";
-$font-size-base: 16px;
-@import "bootstrap";
-@import "bootstrap/theme";
+@import 'shared';
+@import 'foundation-setup';
+@import 'foundation';
+
+@import 'base';
 
 @import 'nav';
+@import 'jumbotron';
 
-body {
-  padding-top: 51px;
-}
+@import 'footer';
 
-.inline {
-  display: inline-block !important;
-}
+@import 'users';
+@import 'activities';

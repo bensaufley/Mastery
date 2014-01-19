@@ -1,6 +1,5 @@
 class StaticPagesController < ApplicationController
-  layout 'static'
-
+  layout 'jumbotron'
   def home
     if user_signed_in?
       @user = current_user
