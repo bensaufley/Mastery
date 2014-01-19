@@ -1,35 +1,28 @@
 - content_for :title, 'Sign up'
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { class: 'form-group col-md-6 col-md-offset-3', role: 'form' }) do |f|
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { class: 'medium-8 medium-centered columns', role: 'form' }) do |f|
   = devise_error_messages!
-  .form-group.input-group
-    .input-group-addon @
-    = f.label :username, class: 'sr-only'
-    = f.text_field :username, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Desired Username', class: 'form-control'
-  .row
-    .form-group.col-sm-6
-      = f.label :first_name, class: 'sr-only'
+  .row.collapse
+    .small-2.columns
+      %span.prefix.radius @
+    .small-10.columns
+      = f.text_field :username, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Desired Username', class: 'form-control'
+  .row.collapse
+    .medium-6.columns
       = f.text_field :first_name, autofocus: true, class: 'form-control ', autocapitalize: false, autocorrect: false, placeholder: 'First Name'
-    .form-group.col-sm-6
-      = f.label :last_name, class: 'sr-only'
+    .medium-6.columns
       = f.text_field :last_name, class: 'form-control', autocapitalize: false, autocorrect: false, placeholder: 'Last Name'
-  .form-group
-    = f.label :email, class: 'sr-only'
-    = f.email_field :email, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Email', class: 'form-control'
-  .form-group
-    = f.label :password, class: 'sr-only'
-    = f.password_field :password, placeholder: 'Password', class: 'form-control'
-  .form-group
-    = f.label :password_confirmation, class: 'sr-only'
-    = f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'form-control'
-  .form-group
-    .input-group
-      %span.input-group-addon
-        = f.check_box :visible
-      = f.label :visible, class: 'form-control'
-    %p.help-block
-      If you choose to make your account private, you will not be able to add friends and share with them.
-      %strong Note:
-      You can choose to make some or all of your activities private while maintaining a public account.
-  .pull-right= f.submit 'Sign up', class: 'btn btn-primary'
-.col-md-6.col-md-offset-3
-  = render 'devise/shared/links'
+  = f.email_field :email, autofocus: true, autocapitalize: false, autocorrect: false, placeholder: 'Email', class: 'form-control'
+  = f.password_field :password, placeholder: 'Password', class: 'form-control'
+  = f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'form-control'
+  = f.check_box :visible
+  = f.label :visible, class: 'form-control'
+  %p.hint
+    If you choose to make your account private, you will not be able to add friends and share with them.
+    %strong Note:
+    You can choose to make some or all of your activities private while maintaining a public account.
+  .row
+    .small-12.actions.text-right
+      = f.submit 'Sign up', class: 'button'
+.row
+  .medium-8.medium-centered.columns
+    = render 'devise/shared/links'
