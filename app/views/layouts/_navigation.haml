@@ -36,8 +36,8 @@
                   %label
                     %i.fi-clock
                     Timed Activities
-                - if current_user.timed_activities.length > 0
-                  - current_user.timed_activities.each do |activity|
+                - if current_user.activities.timed.length > 0
+                  - current_user.activities.timed.each do |activity|
                     %li
                       = link_to activity_path(activity.user,activity) do
                         =activity.name
@@ -50,8 +50,8 @@
                   %label
                     %i.fi-check
                     Counted Activities
-                - if current_user.counted_activities.length > 0
-                  - current_user.counted_activities.each do |activity|
+                - if current_user.activities.counted.length > 0
+                  - current_user.activities.counted.each do |activity|
                     %li
                       = link_to activity_path(activity.user,activity) do
                         =activity.name

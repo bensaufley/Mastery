@@ -1,10 +1,8 @@
 .activity-listing
   - if @activity.timeds.empty?
     .row
-      .small-8.columns
-        There are no instances of #{@activity.name} yet.
-      .small-4.columns
-        = link_to 'Create one?', activity_start_path(@user, @activity), class: 'button expand'
+      .small-12.columns
+        %h3 There are no instances of #{@activity.name} yet.
   - @activity.timeds.order('started DESC, done DESC').each do |i|
     .row{ title: i.started.strftime("%Y.%m.%d %R") + (i.done? ? " (#{i.time_spent})" : " – ongoing"), class: i.done? ? '' : 'active' }
       .small-8.medium-10.columns

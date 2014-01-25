@@ -21,7 +21,7 @@
         = pluralize(@activity.counteds.length,'time')
     .button-group
       -# TODO: SET UP GOALS ARCHITECTURE
-      = link_to '#', class: 'button secondary has-tip', title: 'Coming Soon', data: { tooltip: true } do
+      = link_to '#', class: 'button secondary', title: 'Coming Soon', data: { tooltip: true } do
         %i.fi-graph-bar
         Set Goals
       = link_to edit_activity_path(@activity.user,@activity), class: 'button' do

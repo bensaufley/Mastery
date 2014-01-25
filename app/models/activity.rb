@@ -27,6 +27,14 @@ class Activity < ActiveRecord::Base
     counteds.length
   end
 
+  def self.timed
+    where( type: 'Timed' )
+  end
+
+  def self.counted
+    where( type: 'Counted' )
+  end
+
   def time_spent(format = '%d, %H and %N')
     sum = 0
     timeds.each do |i|
