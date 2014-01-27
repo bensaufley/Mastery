@@ -12,10 +12,12 @@
 .row
   .medium-4.columns
     - if @activity.type.downcase=='timed'
-      %h3.time-spent{data: { 'diff-format' => '%H'}}= @activity.time_spent('%H')[:diff]
-      %h4.time-spent
-        = surround '(',')' do
-          = @activity.time_spent[:diff]
+      %h3.time-spent{data: { 'diff-format' => '%H'}}
+        = @activity.time_spent('%H')[:diff]
+        %br
+        %small.time-spent
+          = surround '(',')' do
+            = @activity.time_spent[:diff]
     - else
       %h4.tally
         = pluralize(@activity.counteds.length,'time')

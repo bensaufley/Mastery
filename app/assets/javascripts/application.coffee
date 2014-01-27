@@ -15,4 +15,11 @@
 #= require foundation
 #= require_tree ./includes
 
-$(document).foundation()
+$(document).ready ->
+
+  if $('[data-timer]').length > 0
+    timers = []
+    $('[data-timer]').each (i)->
+      timers[i] = setInterval(Timer.iterateTimer,100,this)
+
+  $(document).foundation()

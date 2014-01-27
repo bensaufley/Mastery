@@ -2,19 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.activity-listing {
-  .row {
+ul.activity-listing {
+  padding: rem-calc(15);
+  background: #333;
+  list-style: none;
+  margin: 0;
+  li {
     border: 1px solid #ccc;
     border-bottom: none;
+    background: #eee;
+    padding: rem-calc(5 15);
     @include transition(background-color .5s);
+    @include clearfix;
     &:last-child {
       border-bottom: 1px solid #ccc;
     }
     &:hover {
-      background-color: $secondary-color;
+      background-color: #fff;
+      .alert {
+        display: inline-block;
+      }
     }
-    .button-group {
-      padding: 0;
+    .alert {
+      display: none;
     }
   }
 }
